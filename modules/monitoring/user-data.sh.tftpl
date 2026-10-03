@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euxo pipefail
+dnf install -y docker
+systemctl enable --now docker
+install -d -m 0755 /opt/session24/prometheus
+install -d -m 0755 /opt/session24/grafana/provisioning/datasources
+install -d -m 0755 /opt/session24/grafana/provisioning/dashboards
+echo '${prom_config}' | base64 -d > /opt/session24/prometheus/prometheus.yml
+echo '${datasource_config}' | base64 -d > /opt/session24/grafana/provisioning/datasources/prometheus.yml
+echo '${dashboard_provider}' | base64 -d > /opt/session24/grafana/provisioning/dashboards/provider.yml
+echo '${dashboard_json}' | base64 -d > /opt/session24/grafana/provisioning/dashboards/session24.json
+docker network create monitoring
+docker pull prom/prometheus:v3.14.0
+docker pull grafana/grafana:13.2.1
+docker run -d --name prometheus --network monitoring --network-alias prometheus --restart unless-stopped --publish 127.0.0.1:9090:9090 --volume /opt/session24/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro --volume prometheus-data:/prometheus prom/prometheus:v3.14.0 --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+docker run -d --name grafana --network monitoring --restart unless-stopped --publish 127.0.0.1:3000:3000 --volume /opt/session24/grafana/provisioning:/etc/grafana/provisioning:ro --volume grafana-data:/var/lib/grafana grafana/grafana:13.2.1

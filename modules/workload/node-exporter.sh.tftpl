@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euxo pipefail
+dnf install -y docker
+systemctl enable --now docker
+docker pull quay.io/prometheus/node-exporter:v1.12.1
+docker run -d --name node-exporter --restart unless-stopped --publish 9100:9100 quay.io/prometheus/node-exporter:v1.12.1

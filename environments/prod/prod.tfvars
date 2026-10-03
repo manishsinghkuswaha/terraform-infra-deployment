@@ -1,0 +1,9 @@
+aws_region               = "ap-south-1"
+aws_profile              = "default"
+environment_name         = "prod"
+vpc_cidr                 = "10.20.0.0/16"
+workload_instance_type   = "t3.small"
+monitoring_instance_type = "t3.medium"
+enable_monitoring        = true
+enable_sample_workload   = true
+enable_status_alarm      = false

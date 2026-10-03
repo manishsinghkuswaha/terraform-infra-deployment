@@ -1,0 +1,10 @@
+apiVersion: 1
+providers:
+  - name: Session 24
+    orgId: 1
+    folder: Session 24
+    type: file
+    disableDeletion: true
+    editable: true
+    options:
+      path: /etc/grafana/provisioning/dashboards
