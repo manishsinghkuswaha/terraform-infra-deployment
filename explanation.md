@@ -1,7 +1,5 @@
 # Session 24: Terraform on AWS with Prometheus and Grafana
 
-> A mentor's walkthrough of the complete classroom project: from the problem and design, through remote state and AWS deployment, to monitoring, GitHub, and cleanup.
-
 **Project repository:** https://github.com/manishsinghkuswaha/terraform-session24-infra  
 **AWS region:** ap-south-1 (Mumbai)  
 **Deployment scope:** dev only. The prod configuration is for review; do not apply it in this class.
