@@ -321,19 +321,3 @@ The AZ name is a meaningful, stable key. Terraform can identify a subnet by that
 
 **Is this production highly available?**  
 No. It is a classroom lab. One NAT Gateway and one monitoring instance are deliberate cost and complexity trade-offs and create failure points. A production design would assess multi-AZ egress, monitoring redundancy, backups, access controls, alerting, capacity, and recovery objectives.
-
-## 12. Suggested teaching flow
-
-1. Start with the problem: repeatable infrastructure, secure access, and visible service health.
-2. Trace the architecture diagram and ask where public access is blocked.
-3. Explain CIDRs and subnets with the table before opening Terraform files.
-4. Show the backend bootstrap and explain why it uses local state first.
-5. Run fmt, validate, and plan; ask students to predict resources before reading the plan.
-6. Walk from root inputs into the VPC module and back out through outputs.
-7. Apply dev, then verify SSM registration before debugging Prometheus.
-8. Open the Prometheus target page, then Grafana; connect the dashboard to the PromQL expressions.
-9. Stop Node Exporter briefly, observe the failure, and restore it.
-10. Explain what the GitHub workflow validates and what OIDC/protected approval would add later.
-11. Destroy dev together and confirm the backend remains available for the next session.
-
-The goal is not merely to memorize Terraform commands. The goal is for each student to explain what a component does, what depends on it, how to verify it, and where to look when it fails.
